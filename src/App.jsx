@@ -11,7 +11,7 @@ function App() {
   const [forge, setForge] = useState({});
   const [balance, setBalance] = useState(null);
 
-  const forgeAddress = "0xDc37d67343765561B6877B0198B0B8c92AF90045";
+  const forgeAddress = "0xb17b8136c7607AFfE5F911945bE3f0EA1Fd4C3d8";  //Sepolia: 0xDc37d67343765561B6877B0198B0B8c92AF90045
 
   useEffect(() => {
     connectMetamask();
@@ -35,23 +35,42 @@ function App() {
       // switching chainId
       const chainId = await provider.send("eth_chainId", []);
       console.log(chainId);
-      if (chainId != "0xaa36a7") {
-        alert("Switch network to Sepolia Testnet");
-        await ethereum.request({
-          method: "wallet_addEthereumChain",
-          params: [{
-            chainId: "0xaa36a7",
-            chainName: "Sepolia Testnet",
-            rpcUrls: ["https://sepolia.infura.io/v3/"],
-            nativeCurrency: {
-              name: "SepoliaETH",
-              symbol: "ETH",
-              decimals: 18,
-            },
-            blockExplorerUrls: ["https://sepolia.etherscan.io"]
-          }]
-        });
+      if(chainId != 0x13882){
+        alert("Switch network to polygon");
+        await ethereum.request(
+          {method: "wallet_addEthereumChain",
+            params: [{
+              chainId: "0x13882",
+              chainName: "Amoy",
+              rpcUrls: ["https://rpc-amoy.polygon.technology/"],
+              nativeCurrency: {
+                name: "MATIC",
+                symbol: "MATIC",
+                decimals: 18,
+              },
+              blockExplorerUrls: ["https://amoy.polygonscan.com"]
+            }]
+          }
+        )
       }
+
+      // if (chainId != "0xaa36a7") {
+      //   alert("Switch network to Sepolia Testnet");
+      //   await ethereum.request({
+      //     method: "wallet_addEthereumChain",
+      //     params: [{
+      //       chainId: "0xaa36a7",
+      //       chainName: "Sepolia Testnet",
+      //       rpcUrls: ["https://sepolia.infura.io/v3/"],
+      //       nativeCurrency: {
+      //         name: "SepoliaETH",
+      //         symbol: "ETH",
+      //         decimals: 18,
+      //       },
+      //       blockExplorerUrls: ["https://sepolia.etherscan.io"]
+      //     }]
+      //   });
+      // }
 
 
       //getting balance
