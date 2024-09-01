@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from 'react';
 import { ethers } from 'ethers'
 
 function Navbar({balance}) {
@@ -15,7 +14,7 @@ function Navbar({balance}) {
                     <div className='text-xs'>Balance</div>
                     <div className='flex' title={`${bal} MATIC`}>
                         <div className='overflow-hidden h-6 w-20 font-xs font-semibold text-green-400'>{bal}</div>
-                        <div className='font-semibold text-gray-300'>Sepolia</div>
+                        <div className='font-semibold text-gray-300'>Matic</div>
                     </div>
                 </li>
             </ul>
