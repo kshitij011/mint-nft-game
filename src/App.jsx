@@ -11,13 +11,7 @@ function App() {
   const [forge, setForge] = useState({});
   const [balance, setBalance] = useState(null);
 
-  const forgeAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
-
-  // useEffect(() => {
-  //   const balance = async () => {await provider.getBalance(account);
-  //   setBalance(balance);}
-  //   balance();
-  // }, [account]);
+  const forgeAddress = "0xDc37d67343765561B6877B0198B0B8c92AF90045";
 
   useEffect(() => {
     connectMetamask();
@@ -30,9 +24,6 @@ function App() {
       setAccount(accounts[0]);
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const balance = await provider.getBalance(accounts[0])
-      setBalance(balance);
-      console.log("account", account);
 
       console.log("signer", signer);
       console.log("provider", provider);
@@ -41,7 +32,7 @@ function App() {
       const forge = new Contract(forgeAddress, ForgeAbi.abi, signer)
       setForge(forge);
 
-      //switching chainId
+      // switching chainId
       // const chainId = await provider.send("eth_chainId", []);
       // console.log(chainId);
       // if(chainId != 0x13882){
@@ -57,11 +48,18 @@ function App() {
       //           symbol: "MATIC",
       //           decimals: 18,
       //         },
-      //         blockExplorerUrls: ["https://amoy.polygonscan.com/"]
+      //         blockExplorerUrls: ["https://amoy.polygonscan.com"]
       //       }]
       //     }
       //   )
       // }
+
+
+      //getting balance
+      const balance = await provider.getBalance(accounts[0])
+      setBalance(balance);
+      console.log("account", account);
+
       setLoading(false);
     } else {
       console.error("Please install a MetaMask or compatible wallet.");
@@ -70,15 +68,20 @@ function App() {
 
   if(loading){
     return (
-      <h1>...awaiting metamask connection.</h1>
+      <h1 className="text-3xl text-gray-600 font-2xl h-lvh flex justify-center items-center">
+        ...awaiting metamask connection
+      </h1>
     )
   }
   return (
-    <>
+    <div className="bg-[url('./images/bg.jpg')] bg-cover">
       <Navbar balance={balance}/>
       <Sidebar forge={forge} account={account}/>
-    </>
+    </div>
   )
 }
 
 export default App
+
+//Image credit
+{/* <a href="https://www.freepik.com/free-ai-image/cyberpunk-bitcoin-illustration_236291632.htm#query=nft%20background&position=23&from_view=keyword&track=ais_hybrid&uuid=87c64d8c-5816-4440-81d5-413b6a4899d3">Image by freepik</a> */}

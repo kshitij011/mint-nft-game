@@ -4,7 +4,7 @@ pragma solidity ^0.8;
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
 contract myToken is
-    ERC1155("ipfs://Qmf35ciRBTd8dZyaG1GMubymLeAfWDCo7esJEAkxrhcwQr")
+    ERC1155("ipfs://QmamvwMeif9U61uAcGwcaLdw5STZdyySQoWjkrPBXzkdHf")
 {
     uint public constant WATER = 0; // water
     uint public constant SOIL = 1; // soil
