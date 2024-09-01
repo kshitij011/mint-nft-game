@@ -45,7 +45,7 @@ function App() {
             rpcUrls: ["https://sepolia.infura.io/v3/"],
             nativeCurrency: {
               name: "SepoliaETH",
-              symbol: "SepoliaETH",
+              symbol: "ETH",
               decimals: 18,
             },
             blockExplorerUrls: ["https://sepolia.etherscan.io"]
