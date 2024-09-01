@@ -33,26 +33,25 @@ function App() {
       setForge(forge);
 
       // switching chainId
-      // const chainId = await provider.send("eth_chainId", []);
-      // console.log(chainId);
-      // if(chainId != 0x13882){
-      //   alert("Switch network to polygon");
-      //   await ethereum.request(
-      //     {method: "wallet_addEthereumChain",
-      //       params: [{
-      //         chainId: "0x13882",
-      //         chainName: "Amoy",
-      //         rpcUrls: ["https://rpc-amoy.polygon.technology/"],
-      //         nativeCurrency: {
-      //           name: "MATIC",
-      //           symbol: "MATIC",
-      //           decimals: 18,
-      //         },
-      //         blockExplorerUrls: ["https://amoy.polygonscan.com"]
-      //       }]
-      //     }
-      //   )
-      // }
+      const chainId = await provider.send("eth_chainId", []);
+      console.log(chainId);
+      if (chainId != "0xaa36a7") {
+        alert("Switch network to Sepolia Testnet");
+        await ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [{
+            chainId: "0xaa36a7",
+            chainName: "Sepolia Testnet",
+            rpcUrls: ["https://sepolia.infura.io/v3/"],
+            nativeCurrency: {
+              name: "SepoliaETH",
+              symbol: "SepoliaETH",
+              decimals: 18,
+            },
+            blockExplorerUrls: ["https://sepolia.etherscan.io"]
+          }]
+        });
+      }
 
 
       //getting balance

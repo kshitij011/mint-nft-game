@@ -10,7 +10,7 @@ function Navbar({balance}) {
             <ul className='flex flex-row w-full h-full justify-around items-center'>
                 <li className='text-red-400 font-bold'>Forge NFT</li>
                 <a href="https://testnets.opensea.io/collection/mint-nft-game-1-4"><li>View on OpenSea</li></a>
-                <a href="https://www.oklink.com/amoy/address/0xb17b8136c7607affe5f911945be3f0ea1fd4c3d8/contract"><li>GitHub</li></a>
+                <a href="https://github.com/kshitij011/mint-nft-game/tree/master"><li>GitHub</li></a>
                 <li className='text-center'>
                     <div className='text-xs'>Balance</div>
                     <div className='flex' title={`${bal} MATIC`}>
