@@ -1,14 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8;
 
-import "./ERC1155.sol";
+import "./MyToken.sol";
+import "hardhat/console.sol";
 
 contract Forge {
-    myToken public _myToken;
+    MyToken private immutable _myToken;
 
     constructor(address _forging) {
-        _myToken = myToken(_forging);
+        _myToken = MyToken(_forging);
     }
+
 
     function balanceOf(address _address, uint id) public view returns (uint) {
         return _myToken.balanceOf(_address, id);

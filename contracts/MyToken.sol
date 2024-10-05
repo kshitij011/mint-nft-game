@@ -3,7 +3,7 @@ pragma solidity ^0.8;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
-contract myToken is
+contract MyToken is
     ERC1155("ipfs://QmamvwMeif9U61uAcGwcaLdw5STZdyySQoWjkrPBXzkdHf")
 {
     uint public constant WATER = 0; // water
@@ -14,16 +14,16 @@ contract myToken is
     uint public constant VAPOR = 5; // water + fire = waterVapor
     uint public constant POT = 6; // water + soil + fire = pot
 
-    // address => tokenId => timestamp
-    mapping(uint => uint) public tokenTime;
+    // tokenId => timestamp
+    mapping(uint => uint) public cooldownTime;
 
     // mint token with cooldown
     function mint(address _to, uint _tokenId) public {
         require(_tokenId < 3, "Cannot mint");
         // cooldown for the particular tokenId
-        require(tokenTime[_tokenId] <= block.timestamp, "Cooldown");
+        require(cooldownTime[_tokenId] <= block.timestamp, "Cooldown");
         _mint(_to, _tokenId, 1, "");
-        tokenTime[_tokenId] = block.timestamp + 60;
+        cooldownTime[_tokenId] = block.timestamp + 60 seconds;
     }
 
     // forge two or more NFT to one.
@@ -41,7 +41,10 @@ contract myToken is
             _burn(_to, 0, 1);
             _burn(_to, 2, 1);
             _mint(_to, _tokenId, 1, "");
-        } else if (_tokenId == 6) {
+
+         // } else if (_tokenId == 6) {     coverage tool didn't cover for this
+         // but shows 100% coverage for only else block where no condition is checked
+        } else if (_tokenId == 6){
             _burn(_to, 0, 1);
             _burn(_to, 1, 1);
             _burn(_to, 2, 1);
@@ -53,12 +56,6 @@ contract myToken is
     function trade(address _to, uint _inputToken, uint _desiredToken) public {
         require(_desiredToken < 3, "Cannot trade tokenId greater than 2");
         require(_inputToken != _desiredToken, "Same tokens");
-        // if(_desiredToken){
-        //     _burn(_to, _inputToken, 1);
-        //     _mint(_to, _desiredToken, 1, "");
-        // }else{
-        //     _burn(_to, _inputToken, 1);
-        // }
 
         _burn(_to, _inputToken, 1);
         _mint(_to, _desiredToken, 1, "");
