@@ -21,7 +21,6 @@ contract Forge {
     }
 
     function mintNFT(uint _tokenId) public {
-        require(_tokenId < 3, "Cannot mint");
         _myToken.mint(msg.sender, _tokenId);
     }
 

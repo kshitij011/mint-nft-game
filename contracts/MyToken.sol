@@ -2,10 +2,19 @@
 pragma solidity ^0.8;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract MyToken is
-    ERC1155("ipfs://QmamvwMeif9U61uAcGwcaLdw5STZdyySQoWjkrPBXzkdHf")
-{
+contract MyToken is ERC1155("") {
+
+    string public name = "Mint-NFT-Game";
+    string public symbol = "MNG";
+
+    string private _uri = "ipfs://QmamvwMeif9U61uAcGwcaLdw5STZdyySQoWjkrPBXzkdHf/";
+
+    function uri(uint256 id) public view override returns (string memory) {
+        return string(abi.encodePacked(_uri, Strings.toString(id)));
+    }
+
     uint public constant WATER = 0; // water
     uint public constant SOIL = 1; // soil
     uint public constant FIRE = 2; // fire
